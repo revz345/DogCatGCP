@@ -1,0 +1,69 @@
+Step1: Our main file name should be app.py
+step2: our flask instance name should be app
+        app:app
+step3 : Create a new file and name it as Procfile
+        Note: Procfile should not have any extension like .txt
+        P should be capital case
+
+step4 : In Procfile we are supposed to mention the commands which will be used by the could instance at the time of deployment.
+
+#initialising Git on local machine Git
+git init
+git add .
+git commit -m "Initial commit"
+
+
+# steps running on Heroku cloud.
+
+heroku login
+heroku create
+git remote -v
+
+command for running existing Heroku instance
+heroku git:remote -a existingappName
+git push origin master
+
+# reference url : https://devcenter.heroku.com/articles/git
+===============================================+++++++++++++++============================
+
+
+# Steps running on AWS cloud - Elastic Beanstalk
+
+Step1: Your main python file should be application.py
+Step2: Your flask object name in application.py file, which we have defines in application.py should also be application.
+Step3: .ebignore --Responsible to hold the name of the those files ,  files that we don't want to push into cloud
+Step4: Create a requirement.txt file
+       command: pip freeze > requirement.txt
+Step5: Create a folder in your application and name it as .ebextensions
+Step6: Inside .ebextensions we have t create a new file and name it as python.config
+Step7: In python.config we are suppose to mention the below commands
+       option_settings:
+            "aws:elasticbeanstalk:container:python":
+               WSGIPath: application:application
+
+
+=======================++++++++++++++++++++++++++=======================================================================
+# Steps running on AWS cloud - GCP
+Step 1: Your main python file name should be main.py
+step 2 : flask object  name should be application in main.py
+Step 3: create a new file and name it as app.yaml
+STEP 4 : ADD THE BELOW CONTECT TO app.yaml
+        runtime: python
+env: flex
+entrypoint: gunicorn -b :$PORT main:application
+
+runtime config:
+  python_version: 3
+
+
+manual_scaling:
+  instances: 1
+
+resources:
+  cpu: 1
+  memory_gb: 0.5
+  disk_size_gb: 10
+
+
+ step 5: initialize your local git folder
+
